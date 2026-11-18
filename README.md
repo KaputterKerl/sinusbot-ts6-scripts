@@ -20,7 +20,7 @@ Tested with SinusBot 1.1f in the [Gamer92000/sinusbot-docker](https://github.com
 |---|---|
 | `!ys <term>` | Show 5 search results with channel and duration |
 | `!1` … `!5` | Queue a result of your last search |
-| `!y <link>` | Queue a video; a link with only `list=` imports the playlist |
+| `!y <link>` | Queue a video (watch, youtu.be and Shorts links); a link with only `list=` imports the playlist |
 | `!yp <link/id>` | Import a playlist (default max. 200) |
 | `!q`, `!np` | Show the queue, show the current track |
 | `!skip` / `!next`, `!remove <n>`, `!shuffle`, `!clear`, `!stop` | Control the queue |

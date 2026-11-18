@@ -166,8 +166,11 @@ registerPlugin({
         page();
     }
 
+    // watch?v=ID, youtu.be/ID, and shorts/ID, live/ID, embed/ID links
+    var VIDEO_ID = /(?:[?&]v=|youtu\.be\/|\/(?:shorts|live|embed)\/)([\w-]{11})/;
+
     function addUrl(ev, arg) {
-        var m = /(?:v=|youtu\.be\/)([\w-]{11})/.exec(arg);
+        var m = VIDEO_ID.exec(arg);
         if (!m) return reply(ev, 'No video id found.');
         api('videos', { part: 'snippet', id: m[1] }, function (err, data) {
             if (err || !data.items.length) return reply(ev, err || 'Video not found.');
@@ -227,7 +230,7 @@ registerPlugin({
             case 'y': case 'yt':
                 if (!arg) return reply(ev, 'Usage: ' + prefix + 'y <YouTube video or playlist link>');
                 // playlist link without a video id -> whole playlist, otherwise single video
-                if (/[?&]list=/.test(arg) && !/[?&]v=|youtu\.be\//.test(arg)) return importPlaylist(ev, arg);
+                if (/[?&]list=/.test(arg) && !VIDEO_ID.test(arg)) return importPlaylist(ev, arg);
                 return addUrl(ev, arg);
             case 'q': case 'queue': return showQueue(ev);
             case 'skip': case 'next': return next();
